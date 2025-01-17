@@ -1,15 +1,17 @@
-package adeo.leroymerlin.cdp;
+package adeo.leroymerlin.cdp.service;
 
+import adeo.leroymerlin.cdp.entity.Event;
+import adeo.leroymerlin.cdp.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EventService {
+public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
-    public EventService(EventRepository eventRepository) {
+    public EventServiceImpl(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
@@ -17,7 +19,7 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public void delete(Long id) {
+    public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
 

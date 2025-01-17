@@ -1,6 +1,7 @@
-package adeo.leroymerlin.cdp;
+package adeo.leroymerlin.cdp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import adeo.leroymerlin.cdp.service.EventServiceImpl;
+import adeo.leroymerlin.cdp.entity.Event;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/events")
 public class EventController {
 
-    private final EventService eventService;
+    private final EventServiceImpl eventService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventServiceImpl eventService) {
         this.eventService = eventService;
     }
 
@@ -27,7 +28,7 @@ public class EventController {
 
     @DeleteMapping(value = "/{id}")
     public void deleteEvent(@PathVariable Long id) {
-        eventService.delete(id);
+        eventService.deleteEvent(id);
     }
 
     @PutMapping(value = "/{id}")
