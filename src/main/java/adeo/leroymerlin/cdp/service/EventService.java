@@ -1,5 +1,7 @@
-package adeo.leroymerlin.cdp;
+package adeo.leroymerlin.cdp.service;
 
+import adeo.leroymerlin.cdp.entity.Event;
+import adeo.leroymerlin.cdp.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
