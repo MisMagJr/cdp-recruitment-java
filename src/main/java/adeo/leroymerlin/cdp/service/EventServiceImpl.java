@@ -25,10 +25,10 @@ public class EventServiceImpl implements EventService {
         eventRepository.deleteById(id);
     }
 
-    public List<Event> getFilteredEvents(String query) {
+    public List<EventBO> getFilteredEvents(String query) {
         List<Event> events = eventRepository.findAll();
         // Filter the events list in pure JAVA here
 
-        return events;
+        return EventMapper.mapEntitiesToBOs(events);
     }
 }

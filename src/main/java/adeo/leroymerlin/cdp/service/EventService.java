@@ -10,5 +10,5 @@ public interface EventService {
 
     void deleteEvent(Long id);
 
-    List<Event> getFilteredEvents(String query);
+    List<EventBO> getFilteredEvents(String query);
 }
