@@ -1,5 +1,6 @@
 package adeo.leroymerlin.cdp.controller;
 
+import adeo.leroymerlin.cdp.business.EventBO;
 import adeo.leroymerlin.cdp.dto.EventDTO;
 import adeo.leroymerlin.cdp.service.EventService;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 
@@ -42,6 +44,6 @@ class EventControllerTest {
 
         eventController.updateEvent(eventId, eventDTO);
 
-        verify(eventService).updateEvent(any(), any());
+        verify(eventService).updateEvent(eq(1L), any(EventBO.class));
     }
 }
