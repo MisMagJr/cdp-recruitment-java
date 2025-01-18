@@ -34,6 +34,6 @@ public class EventController {
     }
 
     @PutMapping(value = "/{id}")
-    public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
+    public void updateEvent(@PathVariable Long id, @RequestBody EventDTO event) {
     }
 }
