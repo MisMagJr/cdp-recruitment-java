@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
@@ -32,11 +33,16 @@ class EventControllerTest {
     }
 
     @Test
-    void deleteEvent() {
+    void deleteEventTest() {
+        Long eventId = 1L;
+
+        eventController.deleteEvent(eventId);
+
+        verify(eventService, times(1)).deleteEvent(eventId);
     }
 
     @Test
-    void updateEvent() {
+    void updateEventTest() {
         Long eventId = 1L;
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(eventId);
@@ -44,6 +50,6 @@ class EventControllerTest {
 
         eventController.updateEvent(eventId, eventDTO);
 
-        verify(eventService).updateEvent(eq(1L), any(EventBO.class));
+        verify(eventService, times(1)).updateEvent(eq(1L), any(EventBO.class));
     }
 }

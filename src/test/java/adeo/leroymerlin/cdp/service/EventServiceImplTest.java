@@ -2,6 +2,7 @@ package adeo.leroymerlin.cdp.service;
 
 import adeo.leroymerlin.cdp.business.EventBO;
 import adeo.leroymerlin.cdp.entity.Event;
+import adeo.leroymerlin.cdp.exception.ResourceNotFoundException;
 import adeo.leroymerlin.cdp.mapper.EventMapper;
 import adeo.leroymerlin.cdp.repository.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,9 +16,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 // TODO at the end
@@ -44,7 +45,24 @@ class EventServiceImplTest {
     }
 
     @Test
-    void deleteEvent() {
+    void deleteEventTest() {
+        when(eventRepository.existsById(eventId)).thenReturn(true);
+
+        eventService.deleteEvent(eventId);
+
+        verify(eventRepository, times(1)).existsById(eventId);
+        verify(eventRepository, times(1)).deleteById(eventId);
+    }
+
+    @Test
+    void deleteEventTest_DoesntExist() {
+        when(eventRepository.existsById(eventId)).thenReturn(false);
+
+        assertThatThrownBy(() -> eventService.deleteEvent(eventId))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Event with id " + eventId + " not found");
+
+        verify(eventRepository, times(1)).existsById(eventId);
     }
 
     @Test
@@ -63,7 +81,7 @@ class EventServiceImplTest {
         assertThat(result).isNotNull()
                 .extracting(EventBO::getId, EventBO::getComment, EventBO::getTitle, EventBO::getBands, EventBO::getImgUrl, EventBO::getNbStars)
                 .containsExactly(eventBO.getId(), eventBO.getComment(), eventBO.getTitle(), eventBO.getBands(), eventBO.getImgUrl(), eventBO.getNbStars());
-        verify(eventRepository).findById(eventId);
-        verify(eventRepository).save(any(Event.class));
+        verify(eventRepository, times(1)).findById(eventId);
+        verify(eventRepository, times(1)).save(any(Event.class));
     }
 }
