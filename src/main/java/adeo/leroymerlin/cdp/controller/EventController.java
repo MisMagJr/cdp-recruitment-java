@@ -1,5 +1,7 @@
 package adeo.leroymerlin.cdp.controller;
 
+import adeo.leroymerlin.cdp.dto.EventDTO;
+import adeo.leroymerlin.cdp.mapper.EventMapper;
 import adeo.leroymerlin.cdp.service.EventServiceImpl;
 import adeo.leroymerlin.cdp.entity.Event;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,8 @@ public class EventController {
     }
 
     @GetMapping(value = "/")
-    public List<Event> findEvents() {
-        return eventService.getEvents();
+    public List<EventDTO> findEvents() {
+        return EventMapper.mapToDTOs(eventService.getEvents());
     }
 
     @GetMapping(value = "/search/{query}")
