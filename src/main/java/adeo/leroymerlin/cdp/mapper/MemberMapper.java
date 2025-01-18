@@ -20,7 +20,16 @@ public class MemberMapper {
         return memberDTO;
     }
 
-    public static MemberBO mapToBO(Member member) {
+    public static MemberBO mapEntityToBO(Member member) {
+        if (member == null) return null;
+
+        MemberBO memberBO = new MemberBO();
+        memberBO.setId(member.getId());
+        memberBO.setName(member.getName());
+        return memberBO;
+    }
+
+    public static MemberBO mapDTOToBO(MemberDTO member) {
         if (member == null) return null;
 
         MemberBO memberBO = new MemberBO();
@@ -38,6 +47,7 @@ public class MemberMapper {
         return member;
     }
 
+
     public static Set<MemberDTO> mapToDTOs(Set<MemberBO> members) {
         if (members == null || members.isEmpty()) {
             return Set.of();
@@ -47,12 +57,21 @@ public class MemberMapper {
                 .collect(Collectors.toSet());
     }
 
-    public static Set<MemberBO> mapToBOs(Set<Member> members) {
+    public static Set<MemberBO> mapEntitiesToBOs(Set<Member> members) {
         if (members == null || members.isEmpty()) {
             return Set.of();
         }
         return members.stream()
-                .map(MemberMapper::mapToBO)
+                .map(MemberMapper::mapEntityToBO)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<MemberBO> mapDTOsToBOs(Set<MemberDTO> members) {
+        if (members == null || members.isEmpty()) {
+            return Set.of();
+        }
+        return members.stream()
+                .map(MemberMapper::mapDTOToBO)
                 .collect(Collectors.toSet());
     }
 

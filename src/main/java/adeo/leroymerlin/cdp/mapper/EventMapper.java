@@ -6,7 +6,6 @@ import adeo.leroymerlin.cdp.entity.Event;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 // Condition pure JAVA sinon utilisation de MapStruct
@@ -22,14 +21,25 @@ public class EventMapper {
         return eventDTO;
     }
 
-    public static EventBO mapToBO(Event event) {
+    public static EventBO mapEntityToBO(Event event) {
         EventBO eventBO = new EventBO();
         eventBO.setId(event.getId());
         eventBO.setTitle(event.getTitle());
         eventBO.setImgUrl(event.getImgUrl());
         eventBO.setComment(event.getComment());
         eventBO.setNbStars(event.getNbStars());
-        eventBO.setBands(BandMapper.mapToBOs(event.getBands()));
+        eventBO.setBands(BandMapper.mapEntitiesToBOs(event.getBands()));
+        return eventBO;
+    }
+
+    public static EventBO mapDTOToBO(EventDTO event) {
+        EventBO eventBO = new EventBO();
+        eventBO.setId(event.getId());
+        eventBO.setTitle(event.getTitle());
+        eventBO.setImgUrl(event.getImgUrl());
+        eventBO.setComment(event.getComment());
+        eventBO.setNbStars(event.getNbStars());
+        eventBO.setBands(BandMapper.mapDTOsToBOs(event.getBands()));
         return eventBO;
     }
 
@@ -53,12 +63,21 @@ public class EventMapper {
                 .collect(Collectors.toList());
     }
 
-    public static List<EventBO> mapToBOs(List<Event> events) {
+    public static List<EventBO> mapEntitiesToBOs(List<Event> events) {
         if (events == null || events.isEmpty()) {
             return Collections.emptyList();
         }
         return events.stream()
-                .map(EventMapper::mapToBO)
+                .map(EventMapper::mapEntityToBO)
+                .collect(Collectors.toList());
+    }
+
+    public static List<EventBO> mapDTOsToBOs(List<EventDTO> events) {
+        if (events == null || events.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return events.stream()
+                .map(EventMapper::mapDTOToBO)
                 .collect(Collectors.toList());
     }
 

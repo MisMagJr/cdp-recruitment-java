@@ -18,7 +18,7 @@ public class EventServiceImpl implements EventService {
     }
 
     public List<EventBO> getEvents() {
-        return EventMapper.mapToBOs(eventRepository.findAll());
+        return EventMapper.mapEntitiesToBOs(eventRepository.findAll());
     }
 
     public void deleteEvent(Long id) {

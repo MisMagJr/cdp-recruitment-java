@@ -21,13 +21,23 @@ public class BandMapper {
         return bandDTO;
     }
 
-    public static BandBO mapToBO(Band band) {
+    public static BandBO mapEntityToBO(Band band) {
         if (band == null) return null;
 
         BandBO bandBO = new BandBO();
         bandBO.setId(band.getId());
         bandBO.setName(band.getName());
-        bandBO.setMembers(MemberMapper.mapToBOs(band.getMembers()));
+        bandBO.setMembers(MemberMapper.mapEntitiesToBOs(band.getMembers()));
+        return bandBO;
+    }
+
+    public static BandBO mapDTOToBO(BandDTO band) {
+        if (band == null) return null;
+
+        BandBO bandBO = new BandBO();
+        bandBO.setId(band.getId());
+        bandBO.setName(band.getName());
+        bandBO.setMembers(MemberMapper.mapDTOsToBOs(band.getMembers()));
         return bandBO;
     }
 
@@ -50,12 +60,21 @@ public class BandMapper {
                 .collect(Collectors.toSet());
     }
 
-    public static Set<BandBO> mapToBOs(Set<Band> bands) {
+    public static Set<BandBO> mapEntitiesToBOs(Set<Band> bands) {
         if (bands == null || bands.isEmpty()) {
             return Set.of();
         }
         return bands.stream()
-                .map(BandMapper::mapToBO)
+                .map(BandMapper::mapEntityToBO)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<BandBO> mapDTOsToBOs(Set<BandDTO> bands) {
+        if (bands == null || bands.isEmpty()) {
+            return Set.of();
+        }
+        return bands.stream()
+                .map(BandMapper::mapDTOToBO)
                 .collect(Collectors.toSet());
     }
 
