@@ -34,5 +34,6 @@ public class EventController {
 
     @PutMapping(value = "/{id}")
     public void updateEvent(@PathVariable Long id, @RequestBody EventDTO event) { // Same EventDTO for request and response, could've created another object for requestBody to separate
+        eventService.updateEvent(id, EventMapper.mapDTOToBO(event));
     }
 }
