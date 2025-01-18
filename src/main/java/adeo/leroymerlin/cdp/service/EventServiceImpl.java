@@ -1,6 +1,8 @@
 package adeo.leroymerlin.cdp.service;
 
+import adeo.leroymerlin.cdp.business.EventBO;
 import adeo.leroymerlin.cdp.entity.Event;
+import adeo.leroymerlin.cdp.mapper.EventMapper;
 import adeo.leroymerlin.cdp.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,8 @@ public class EventServiceImpl implements EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getEvents() {
-        return eventRepository.findAll();
+    public List<EventBO> getEvents() {
+        return EventMapper.mapToBOs(eventRepository.findAll());
     }
 
     public void deleteEvent(Long id) {
