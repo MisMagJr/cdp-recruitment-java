@@ -52,38 +52,18 @@ public class BandMapper {
     }
 
     public static Set<BandDTO> mapToDTOs(Set<BandBO> bands) {
-        if (bands == null || bands.isEmpty()) {
-            return Set.of();
-        }
-        return bands.stream()
-                .map(BandMapper::mapToDTO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(bands, BandMapper::mapToDTO);
     }
 
     public static Set<BandBO> mapEntitiesToBOs(Set<Band> bands) {
-        if (bands == null || bands.isEmpty()) {
-            return Set.of();
-        }
-        return bands.stream()
-                .map(BandMapper::mapEntityToBO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(bands, BandMapper::mapEntityToBO);
     }
 
     public static Set<BandBO> mapDTOsToBOs(Set<BandDTO> bands) {
-        if (bands == null || bands.isEmpty()) {
-            return Set.of();
-        }
-        return bands.stream()
-                .map(BandMapper::mapDTOToBO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(bands, BandMapper::mapDTOToBO);
     }
 
     public static Set<Band> mapToEntities(Set<BandBO> bands) {
-        if (bands == null || bands.isEmpty()) {
-            return Set.of();
-        }
-        return bands.stream()
-                .map(BandMapper::mapToEntity)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(bands, BandMapper::mapToEntity);
     }
 }

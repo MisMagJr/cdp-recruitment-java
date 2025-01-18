@@ -55,38 +55,18 @@ public class EventMapper {
     }
 
     public static List<EventDTO> mapToDTOs(List<EventBO> events) {
-        if (events == null || events.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return events.stream()
-                .map(EventMapper::mapToDTO)
-                .collect(Collectors.toList());
+        return GenericCollectionMapper.mapList(events, EventMapper::mapToDTO);
     }
 
     public static List<EventBO> mapEntitiesToBOs(List<Event> events) {
-        if (events == null || events.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return events.stream()
-                .map(EventMapper::mapEntityToBO)
-                .collect(Collectors.toList());
+        return GenericCollectionMapper.mapList(events, EventMapper::mapEntityToBO);
     }
 
     public static List<EventBO> mapDTOsToBOs(List<EventDTO> events) {
-        if (events == null || events.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return events.stream()
-                .map(EventMapper::mapDTOToBO)
-                .collect(Collectors.toList());
+        return GenericCollectionMapper.mapList(events, EventMapper::mapDTOToBO);
     }
 
     public static List<Event> mapToEntities(List<EventBO> events) {
-        if (events == null || events.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return events.stream()
-                .map(EventMapper::mapToEntity)
-                .collect(Collectors.toList());
+        return GenericCollectionMapper.mapList(events, EventMapper::mapToEntity);
     }
 }

@@ -7,7 +7,6 @@ import adeo.leroymerlin.cdp.dto.MemberDTO;
 import adeo.leroymerlin.cdp.entity.Member;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MemberMapper {
 
@@ -49,38 +48,18 @@ public class MemberMapper {
 
 
     public static Set<MemberDTO> mapToDTOs(Set<MemberBO> members) {
-        if (members == null || members.isEmpty()) {
-            return Set.of();
-        }
-        return members.stream()
-                .map(MemberMapper::mapToDTO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(members, MemberMapper::mapToDTO);
     }
 
     public static Set<MemberBO> mapEntitiesToBOs(Set<Member> members) {
-        if (members == null || members.isEmpty()) {
-            return Set.of();
-        }
-        return members.stream()
-                .map(MemberMapper::mapEntityToBO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(members, MemberMapper::mapEntityToBO);
     }
 
     public static Set<MemberBO> mapDTOsToBOs(Set<MemberDTO> members) {
-        if (members == null || members.isEmpty()) {
-            return Set.of();
-        }
-        return members.stream()
-                .map(MemberMapper::mapDTOToBO)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(members, MemberMapper::mapDTOToBO);
     }
 
     public static Set<Member> mapToEntities(Set<MemberBO> members) {
-        if (members == null || members.isEmpty()) {
-            return Set.of();
-        }
-        return members.stream()
-                .map(MemberMapper::mapToEntity)
-                .collect(Collectors.toSet());
+        return GenericCollectionMapper.mapSet(members, MemberMapper::mapToEntity);
     }
 }
