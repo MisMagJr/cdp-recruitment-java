@@ -6,11 +6,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GenericCollectionMapper {
-    public static <T, R> R map(T source, Function<T, R> mapper) {
-        if (source == null) return null;
-        return mapper.apply(source);
-    }
-
     public static <T, R> Set<R> mapSet(Set<T> source, Function<T, R> mapper) {
         if (source == null || source.isEmpty()) {
             return Set.of();
