@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 // TODO at the end
@@ -44,7 +43,13 @@ class EventServiceImplTest {
     }
 
     @Test
-    void deleteEvent() {
+    void deleteEventTest() {
+        when(eventRepository.existsById(eventId)).thenReturn(true);
+
+        eventService.deleteEvent(eventId);
+
+        verify(eventRepository, times(1)).existsById(eventId);
+        verify(eventRepository, times(1)).deleteById(eventId);
     }
 
     @Test
@@ -63,7 +68,7 @@ class EventServiceImplTest {
         assertThat(result).isNotNull()
                 .extracting(EventBO::getId, EventBO::getComment, EventBO::getTitle, EventBO::getBands, EventBO::getImgUrl, EventBO::getNbStars)
                 .containsExactly(eventBO.getId(), eventBO.getComment(), eventBO.getTitle(), eventBO.getBands(), eventBO.getImgUrl(), eventBO.getNbStars());
-        verify(eventRepository).findById(eventId);
-        verify(eventRepository).save(any(Event.class));
+        verify(eventRepository, times(1)).findById(eventId);
+        verify(eventRepository, times(1)).save(any(Event.class));
     }
 }
