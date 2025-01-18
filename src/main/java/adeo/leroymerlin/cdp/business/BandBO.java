@@ -1,20 +1,14 @@
-package adeo.leroymerlin.cdp.entity;
-
-import jakarta.persistence.*;
+package adeo.leroymerlin.cdp.business;
 
 import java.util.Set;
 
-@Entity
-public class Band {
+public class BandBO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Member> members;
+    private Set<MemberBO> members;
 
     public Long getId() {
         return id;
@@ -24,12 +18,12 @@ public class Band {
         this.id = id;
     }
 
-    public Set<Member> getMembers() {
+    public Set<MemberBO> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<Member> members) {
-        this.members = members;
+    public void setMembers(Set<MemberBO> memberBOS) {
+        this.members = memberBOS;
     }
 
     public String getName() {

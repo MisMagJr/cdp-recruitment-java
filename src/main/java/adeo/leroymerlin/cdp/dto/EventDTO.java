@@ -1,21 +1,15 @@
-package adeo.leroymerlin.cdp.entity;
-
-import jakarta.persistence.*;
+package adeo.leroymerlin.cdp.dto;
 
 import java.util.Set;
 
-@Entity
-public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class EventDTO {
     private Long id;
 
     private String title;
 
     private String imgUrl;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Band> bands;
+    private Set<BandDTO> bands;
 
     private Integer nbStars;
 
@@ -45,12 +39,12 @@ public class Event {
         this.imgUrl = imgUrl;
     }
 
-    public Set<Band> getBands() {
+    public Set<BandDTO> getBands() {
         return bands;
     }
 
-    public void setBands(Set<Band> bands) {
-        this.bands = bands;
+    public void setBands(Set<BandDTO> bandDTOS) {
+        this.bands = bandDTOS;
     }
 
     public Integer getNbStars() {

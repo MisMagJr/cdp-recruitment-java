@@ -1,14 +1,6 @@
-package adeo.leroymerlin.cdp.entity;
+package adeo.leroymerlin.cdp.business;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
-public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class MemberBO {
     private Long id;
 
     String name;

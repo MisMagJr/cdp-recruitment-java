@@ -1,7 +1,8 @@
 package adeo.leroymerlin.cdp.controller;
 
+import adeo.leroymerlin.cdp.dto.EventDTO;
+import adeo.leroymerlin.cdp.mapper.EventMapper;
 import adeo.leroymerlin.cdp.service.EventServiceImpl;
-import adeo.leroymerlin.cdp.entity.Event;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,13 @@ public class EventController {
     }
 
     @GetMapping(value = "/")
-    public List<Event> findEvents() {
-        return eventService.getEvents();
+    public List<EventDTO> findEvents() {
+        return EventMapper.mapToDTOs(eventService.getEvents());
     }
 
     @GetMapping(value = "/search/{query}")
-    public List<Event> findEvents(@PathVariable String query) {
-        return eventService.getFilteredEvents(query);
+    public List<EventDTO> findEvents(@PathVariable String query) {
+        return EventMapper.mapToDTOs(eventService.getFilteredEvents(query));
     }
 
     @DeleteMapping(value = "/{id}")
@@ -32,6 +33,6 @@ public class EventController {
     }
 
     @PutMapping(value = "/{id}")
-    public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
+    public void updateEvent(@PathVariable Long id, @RequestBody EventDTO event) { // Same EventDTO for request and response, could've created another object for requestBody to separate
     }
 }
