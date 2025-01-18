@@ -10,4 +10,6 @@ public interface EventService {
     void deleteEvent(Long id);
 
     List<EventBO> getFilteredEvents(String query);
+
+    EventBO updateEvent(Long id, EventBO eventBO);
 }
