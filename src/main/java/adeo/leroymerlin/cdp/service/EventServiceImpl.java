@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
@@ -23,7 +24,6 @@ public class EventServiceImpl implements EventService {
         return EventMapper.mapEntitiesToBOs(eventRepository.findAll());
     }
 
-    @Transactional
     public void deleteEvent(Long id) {
         if (!eventRepository.existsById(id)) {
             throw new ResourceNotFoundException("Event with id " + id + " not found");
@@ -40,7 +40,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventBO updateEvent(Long id, EventBO eventBO) {
         eventRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event with id " + id + " not found"));
