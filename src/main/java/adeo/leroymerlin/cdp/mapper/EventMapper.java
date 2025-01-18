@@ -4,9 +4,7 @@ import adeo.leroymerlin.cdp.business.EventBO;
 import adeo.leroymerlin.cdp.dto.EventDTO;
 import adeo.leroymerlin.cdp.entity.Event;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // Condition pure JAVA sinon utilisation de MapStruct
 public class EventMapper {

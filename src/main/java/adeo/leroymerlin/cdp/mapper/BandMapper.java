@@ -7,7 +7,6 @@ import adeo.leroymerlin.cdp.dto.BandDTO;
 import adeo.leroymerlin.cdp.entity.Band;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class BandMapper {
 

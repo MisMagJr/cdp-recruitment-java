@@ -1,6 +1,5 @@
 package adeo.leroymerlin.cdp.mapper;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
