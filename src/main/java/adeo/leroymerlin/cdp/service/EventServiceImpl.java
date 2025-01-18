@@ -25,6 +25,10 @@ public class EventServiceImpl implements EventService {
 
     @Transactional
     public void deleteEvent(Long id) {
+        if (!eventRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Event with id " + id + " not found");
+        }
+
         eventRepository.deleteById(id);
     }
 
