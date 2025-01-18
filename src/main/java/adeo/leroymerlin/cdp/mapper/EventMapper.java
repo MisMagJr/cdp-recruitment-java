@@ -4,6 +4,11 @@ import adeo.leroymerlin.cdp.business.EventBO;
 import adeo.leroymerlin.cdp.dto.EventDTO;
 import adeo.leroymerlin.cdp.entity.Event;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 // Condition pure JAVA sinon utilisation de MapStruct
 public class EventMapper {
     public static EventDTO mapToDTO(EventBO event) {
@@ -28,7 +33,7 @@ public class EventMapper {
         return eventBO;
     }
 
-    public static Event mepToEntity(EventBO eventBO) {
+    public static Event mapToEntity(EventBO eventBO) {
         Event event = new Event();
         event.setId(eventBO.getId());
         event.setTitle(eventBO.getTitle());
@@ -37,5 +42,32 @@ public class EventMapper {
         event.setNbStars(eventBO.getNbStars());
         event.setBands(BandMapper.mapToEntities(eventBO.getBands()));
         return event;
+    }
+
+    public static List<EventDTO> mapToDTOs(List<EventBO> events) {
+        if (events == null || events.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return events.stream()
+                .map(EventMapper::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public static List<EventBO> mapToBOs(List<Event> events) {
+        if (events == null || events.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return events.stream()
+                .map(EventMapper::mapToBO)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Event> mapToEntities(List<EventBO> events) {
+        if (events == null || events.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return events.stream()
+                .map(EventMapper::mapToEntity)
+                .collect(Collectors.toList());
     }
 }
