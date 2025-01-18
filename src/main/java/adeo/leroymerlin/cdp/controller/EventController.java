@@ -3,7 +3,6 @@ package adeo.leroymerlin.cdp.controller;
 import adeo.leroymerlin.cdp.dto.EventDTO;
 import adeo.leroymerlin.cdp.mapper.EventMapper;
 import adeo.leroymerlin.cdp.service.EventService;
-import adeo.leroymerlin.cdp.service.EventServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public class EventController {
 
     private final EventService eventService;
 
-    public EventController(EventServiceImpl eventService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
