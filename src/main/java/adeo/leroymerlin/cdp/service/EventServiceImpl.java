@@ -23,6 +23,7 @@ public class EventServiceImpl implements EventService {
         return EventMapper.mapEntitiesToBOs(eventRepository.findAll());
     }
 
+    @Transactional
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
