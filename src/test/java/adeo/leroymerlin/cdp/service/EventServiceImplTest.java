@@ -24,7 +24,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-// TODO at the end
 @ExtendWith(MockitoExtension.class)
 class EventServiceImplTest {
     @Mock
@@ -32,7 +31,7 @@ class EventServiceImplTest {
     @InjectMocks
     private EventServiceImpl eventService;
 
-    private Long eventId = 1L;
+    private final Long eventId = 1L;
     private Event testEvent;
     private List<Event> eventList;
 
