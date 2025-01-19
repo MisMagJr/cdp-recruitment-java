@@ -1,5 +1,7 @@
 package adeo.leroymerlin.cdp.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Set;
 
 public class EventDTO {
@@ -24,6 +26,10 @@ public class EventDTO {
     }
 
     public String getTitle() {
+        return title;
+    }
+    @JsonProperty("title")
+    public String getTitleWithCount() {
         return title + " [" + (bands != null ? bands.size() : 0) + "]";
     }
 
@@ -45,6 +51,7 @@ public class EventDTO {
 
     public void setBands(Set<BandDTO> bandDTOS) {
         this.bands = bandDTOS;
+        updateTitleWithBandCount();
     }
 
     public Integer getNbStars() {
@@ -61,5 +68,19 @@ public class EventDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    private void updateTitleWithBandCount() {
+        if (title != null && bands != null) {
+            int bandCount = bands.size();
+            String expectedSuffix = " [" + bandCount + "]";
+
+            // When getting a PUT request from the FrontEnd, Front wasn't modified to remove the count from the end, so we add check here
+            // The only downside to this, is if a client other than the front end decides to update with a title that really include [n] at the end which is unlikely, but it will get deleted
+            if (title.endsWith(expectedSuffix)) {
+                // Remove the "[n]" suffix from the title if it exists (coming from front of this project)
+                title = title.substring(0, title.length() - expectedSuffix.length());
+            }
+        }
     }
 }
