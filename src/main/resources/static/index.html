@@ -37,7 +37,16 @@
                     <div class="media-body">
                         <h4 class="event media-heading">{{event.title}}</h4>
                         <div>
-                            <span ng-repeat="band in event.bands">{{band.name}} {{$last ? '' : ', '}}</span>
+                            <span ng-repeat="band in event.bands" ng-init="band.showMembers = false">
+                                <a href="#" ng-click="band.showMembers = !band.showMembers">{{band.name}}</a>
+                                {{$last ? '' : ', '}}
+                                <span ng-show="band.showMembers" class="band-members">
+                                    <strong>Members:</strong>
+                                    <span ng-repeat="member in band.members">
+                                        {{member.name}}{{$last ? '' : ', '}}
+                                    </span>
+                                </span>
+                            </span>
                         </div>
                         <div>
                             <input-stars max="5" ng-model="event.nbStars" ng-change="events.updateStars(event)"></input-stars>

@@ -19,3 +19,9 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.band-members {
+    display: block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #555;
+}
