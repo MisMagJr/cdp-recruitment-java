@@ -42,8 +42,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventBO updateEvent(Long id, EventBO eventBO) {
-        eventRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Event with id " + id + " not found"));
+        if (!eventRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Event with id " + id + " not found");
+        }
 
         // The resource we want to update is found in DB
         // Two options here: map the BO to an entity and set id and save or set/replace all fields of dbEvent with those of the request
