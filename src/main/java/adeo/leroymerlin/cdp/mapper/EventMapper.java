@@ -79,12 +79,4 @@ public class EventMapper {
     public static List<EventBO> mapEntitiesToBOs(List<Event> events) {
         return GenericCollectionMapper.mapList(events, EventMapper::mapEntityToBO);
     }
-
-    public static List<EventBO> mapDTOsToBOs(List<EventDTO> events) {
-        return GenericCollectionMapper.mapList(events, EventMapper::mapDTOToBO);
-    }
-
-    public static List<Event> mapToEntities(List<EventBO> events) {
-        return GenericCollectionMapper.mapList(events, EventMapper::mapToEntity);
-    }
 }
