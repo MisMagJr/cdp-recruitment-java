@@ -1,5 +1,7 @@
 package adeo.leroymerlin.cdp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 public class BandDTO {
@@ -27,6 +29,11 @@ public class BandDTO {
     }
 
     public String getName() {
+        return name;
+    }
+
+    @JsonIgnore
+    public String getNameWithCount() {
         return name + " [" + (members != null ? members.size() : 0) + "]";
     }
 
