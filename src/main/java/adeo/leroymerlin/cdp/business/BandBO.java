@@ -33,4 +33,10 @@ public class BandBO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean hasMemberWithNameContainsPattern(String pattern) {
+        return members.stream()
+                .anyMatch(member -> member.getName() != null
+                        && member.getName().toLowerCase().contains(pattern.toLowerCase())); // The readme didn't specify or not to be case sensitive so I decided to make it not
+    }
 }

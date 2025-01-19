@@ -62,4 +62,9 @@ public class EventBO {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public boolean hasBandWithMemberNamePattern(String pattern) {
+        return bands.stream()
+                .anyMatch(band -> band.hasMemberWithNameContainsPattern(pattern));
+    }
 }
