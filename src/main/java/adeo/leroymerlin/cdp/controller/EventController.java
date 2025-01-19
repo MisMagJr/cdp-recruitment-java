@@ -24,7 +24,7 @@ public class EventController {
 
     @GetMapping(value = "/search/{query}")
     public List<EventDTO> findEvents(@PathVariable String query) {
-        return EventMapper.mapToDTOs(eventService.getFilteredEvents(query));
+        return EventMapper.mapToDTOsWithCount(eventService.getFilteredEvents(query));
     }
 
     @DeleteMapping(value = "/{id}")

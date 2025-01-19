@@ -20,6 +20,12 @@ public class BandMapper {
         return bandDTO;
     }
 
+    public static BandDTO mapToDTOWithCount(BandBO band) {
+        BandDTO bandDTO = mapToDTO(band);
+        bandDTO.setName(bandDTO.getNameWithCount());
+        return bandDTO;
+    }
+
     public static BandBO mapEntityToBO(Band band) {
         if (band == null) return null;
 
@@ -52,6 +58,10 @@ public class BandMapper {
 
     public static Set<BandDTO> mapToDTOs(Set<BandBO> bands) {
         return GenericCollectionMapper.mapSet(bands, BandMapper::mapToDTO);
+    }
+
+    public static Set<BandDTO> mapToDTOsWithCount(Set<BandBO> bands) {
+        return GenericCollectionMapper.mapSet(bands, BandMapper::mapToDTOWithCount);
     }
 
     public static Set<BandBO> mapEntitiesToBOs(Set<Band> bands) {
