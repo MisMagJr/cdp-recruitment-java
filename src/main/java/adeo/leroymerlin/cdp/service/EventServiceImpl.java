@@ -33,10 +33,11 @@ public class EventServiceImpl implements EventService {
     }
 
     public List<EventBO> getFilteredEvents(String query) {
-        List<Event> events = eventRepository.findAll();
         // Filter the events list in pure JAVA here
-
-        return EventMapper.mapEntitiesToBOs(events);
+        return EventMapper
+                .mapEntitiesToBOs(eventRepository.findAll())
+                .stream()
+                .filter(eventBO -> eventBO.hasBandWithMemberNamePattern(query)).toList();
     }
 
     @Override
