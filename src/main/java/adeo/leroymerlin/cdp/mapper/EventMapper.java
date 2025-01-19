@@ -9,6 +9,8 @@ import java.util.List;
 // Condition pure JAVA sinon utilisation de MapStruct
 public class EventMapper {
     public static EventDTO mapToDTO(EventBO event) {
+        if (event == null) return null;
+
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(event.getId());
         eventDTO.setTitle(event.getTitle());
@@ -18,8 +20,18 @@ public class EventMapper {
         eventDTO.setBands(BandMapper.mapToDTOs(event.getBands()));
         return eventDTO;
     }
+    public static EventDTO mapToDTOWithCount(EventBO event) {
+        if (event == null) return null;
+
+        EventDTO eventDTO = mapToDTO(event);
+        eventDTO.setTitle(eventDTO.getTitleWithCount());
+        eventDTO.setBands(BandMapper.mapToDTOsWithCount(event.getBands()));
+        return eventDTO;
+    }
 
     public static EventBO mapEntityToBO(Event event) {
+        if (event == null) return null;
+
         EventBO eventBO = new EventBO();
         eventBO.setId(event.getId());
         eventBO.setTitle(event.getTitle());
@@ -31,6 +43,8 @@ public class EventMapper {
     }
 
     public static EventBO mapDTOToBO(EventDTO event) {
+        if (event == null) return null;
+
         EventBO eventBO = new EventBO();
         eventBO.setId(event.getId());
         eventBO.setTitle(event.getTitle());
@@ -42,6 +56,8 @@ public class EventMapper {
     }
 
     public static Event mapToEntity(EventBO eventBO) {
+        if (eventBO == null) return null;
+
         Event event = new Event();
         event.setId(eventBO.getId());
         event.setTitle(eventBO.getTitle());
@@ -54,6 +70,10 @@ public class EventMapper {
 
     public static List<EventDTO> mapToDTOs(List<EventBO> events) {
         return GenericCollectionMapper.mapList(events, EventMapper::mapToDTO);
+    }
+
+    public static List<EventDTO> mapToDTOsWithCount(List<EventBO> events) {
+        return GenericCollectionMapper.mapList(events, EventMapper::mapToDTOWithCount);
     }
 
     public static List<EventBO> mapEntitiesToBOs(List<Event> events) {
