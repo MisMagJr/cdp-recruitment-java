@@ -24,7 +24,7 @@ public class EventDTO {
     }
 
     public String getTitle() {
-        return title;
+        return title + " [" + (bands != null ? bands.size() : 0) + "]";
     }
 
     public void setTitle(String title) {
