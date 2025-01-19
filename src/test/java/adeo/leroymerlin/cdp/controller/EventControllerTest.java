@@ -29,7 +29,12 @@ class EventControllerTest {
     }
 
     @Test
-    void testFindEvents() {
+    void findEventsFilteredTest() {
+        String query = "Sa";
+
+        eventController.findEvents(query);
+
+        verify(eventService, times(1)).getFilteredEvents(query);
     }
 
     @Test
