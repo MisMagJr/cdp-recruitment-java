@@ -27,7 +27,7 @@ public class BandDTO {
     }
 
     public String getName() {
-        return name;
+        return name + " [" + (members != null ? members.size() : 0) + "]";
     }
 
     public void setName(String name) {
