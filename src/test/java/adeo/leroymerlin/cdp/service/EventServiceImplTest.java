@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +24,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-// TODO at the end
 @ExtendWith(MockitoExtension.class)
 class EventServiceImplTest {
     @Mock
@@ -33,7 +31,7 @@ class EventServiceImplTest {
     @InjectMocks
     private EventServiceImpl eventService;
 
-    private Long eventId = 1L;
+    private final Long eventId = 1L;
     private Event testEvent;
     private List<Event> eventList;
 
@@ -78,6 +76,15 @@ class EventServiceImplTest {
 
     @Test
     void getEvents() {
+        when(eventRepository.findAll()).thenReturn(eventList);
+
+        List<EventBO> result = eventService.getEvents();
+
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(2);
+        verify(eventRepository, times(1)).findAll();
     }
 
     @Test
@@ -119,7 +126,7 @@ class EventServiceImplTest {
     void updateEventTest() {
         EventBO eventBO = EventMapper.mapEntityToBO(testEvent);
         eventBO.setNbStars(3);
-        when(eventRepository.findById(eventId)).thenReturn(Optional.of(testEvent));
+        when(eventRepository.existsById(eventId)).thenReturn(true);
         when(eventRepository.save(any(Event.class))).then(AdditionalAnswers.returnsFirstArg());
 
         EventBO result = eventService.updateEvent(eventId, eventBO);
@@ -127,7 +134,20 @@ class EventServiceImplTest {
         assertThat(result).isNotNull()
                 .extracting(EventBO::getId, EventBO::getComment, EventBO::getTitle, EventBO::getImgUrl, EventBO::getNbStars)
                 .containsExactly(eventBO.getId(), eventBO.getComment(), eventBO.getTitle(), eventBO.getImgUrl(), eventBO.getNbStars());
-        verify(eventRepository, times(1)).findById(eventId);
+        verify(eventRepository, times(1)).existsById(eventId);
         verify(eventRepository, times(1)).save(any(Event.class));
+    }
+
+    @Test
+    void updateEventTest_EventNotFound() {
+        EventBO eventBO = EventMapper.mapEntityToBO(testEvent);
+        eventBO.setNbStars(3);
+        when(eventRepository.existsById(eventId)).thenReturn(false);
+
+        assertThatThrownBy(() -> eventService.updateEvent(eventId, eventBO))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Event with id " + eventId + " not found");
+
+        verify(eventRepository, times(1)).existsById(eventId);
     }
 }

@@ -9,13 +9,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
-// TODO at the end
 @ExtendWith(MockitoExtension.class)
 class EventControllerTest {
     @Mock
@@ -26,6 +27,19 @@ class EventControllerTest {
 
     @Test
     void findEvents() {
+        EventBO eventBO1 = new EventBO();
+        eventBO1.setId(1L);
+        EventBO eventBO2 = new EventBO();
+        eventBO2.setId(2L);
+        when(eventService.getEvents()).thenReturn(List.of(eventBO1, eventBO2));
+
+        List<EventDTO> eventDTOS = eventController.findEvents();
+
+        assertThat(eventDTOS)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(2);
+        verify(eventService, times(1)).getEvents();
     }
 
     @Test
