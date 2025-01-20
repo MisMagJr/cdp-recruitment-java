@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 public class EventServiceImpl implements EventService {
 
-    private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class); // No Lombok or else would've used this annotation: @Slf4j
 
     private final EventRepository eventRepository;
 
