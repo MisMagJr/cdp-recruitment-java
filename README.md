@@ -1,5 +1,8 @@
 # Java - Spring
 
+## Notes:
+- See branch `extra/extra-ihm-feature` for extra IHM feature that are not asked here
+- main branch contains only 1 extra feature that I decided to put there to make it easy to manually test filteredEvents (Click on band name shows members)
 ## My Event
 
 - My Event is an application to manage musical events.
