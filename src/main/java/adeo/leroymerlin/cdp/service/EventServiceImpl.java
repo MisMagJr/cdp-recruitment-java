@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService {
         // since it's a PUT not a PATCH, we wanna replace whole resource with the data in the request not only replace provided so we can either map or create new entity and set fields and id
         // or just update all fields of dbEvent either they're null or not in eventBO
         Event newEvent = EventMapper.mapToEntity(eventBO);
-        eventBO.setId(id); // Ensures that the id that we're updating is the same as the one in path and the one we verified in first line
+        newEvent.setId(id); // Ensures that the id that we're updating is the same as the one in path and the one we verified in first line
 
         EventBO savedEvent = EventMapper.mapEntityToBO(eventRepository.save(newEvent));
         logger.info("Event with id: {} successfully updated.", id);
