@@ -35,6 +35,7 @@ function EventsController(EventService){
     var vm = this;
     vm.deleteEvent = deleteEvent;
     vm.updateStars = updateStars;
+    vm.handleEditComment = handleEditComment;
 
     activate();
 
@@ -56,5 +57,12 @@ function EventsController(EventService){
 
     function updateStars(event){
         return EventService.updateStars(event);
+    }
+
+    function handleEditComment(event) {
+        if (event.editingComment) {
+            EventService.updateStars(event);
+        }
+        event.editingComment = !event.editingComment;
     }
 }
