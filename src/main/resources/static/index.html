@@ -51,23 +51,26 @@
                         <div>
                             <input-stars max="5" ng-model="event.nbStars" ng-change="events.updateStars(event)"></input-stars>
                         </div>
-                        <div ng-if="!event.editingComment">
-                            <p ng-if="event.comment">{{event.comment}}</p>
-                            <p ng-if="!event.comment">No comment yet.</p>
-                        </div>
-                        <div ng-if="event.editingComment">
-                            <form>
-                                <textarea placeholder="Ajouter un commentaire" ng-model="event.comment" class="form-control" rows="3"></textarea>
-                            </form>
-                        </div>
+                        <div class="comment-section">
+                            <label for="comment" class="comment-label">Comment:</label>
+                            <div ng-if="!event.editingComment">
+                                <p ng-if="event.comment">{{event.comment}}</p>
+                                <p ng-if="!event.comment">No comment yet.</p>
+                            </div>
+                            <div ng-if="event.editingComment">
+                                <form>
+                                    <textarea id="comment" placeholder="Ajouter un commentaire" ng-model="event.comment" class="form-control" rows="3"></textarea>
+                                </form>
+                            </div>
 
-                        <div class="pull-right">
-                            <button ng-click="events.handleEditComment(event)" type="button" class="btn btn-primary">
-                                <i class="fa" ng-class="{'fa-pencil': !event.editingComment, 'fa-save': event.editingComment}" aria-hidden="true"></i>
-                            </button>
-                            <button ng-click="events.deleteEvent(event)" type="button" class="btn btn-danger">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
+                            <div class="pull-right">
+                                <button ng-click="events.handleEditComment(event)" type="button" class="btn btn-primary">
+                                    <i class="fa" ng-class="{'fa-pencil': !event.editingComment, 'fa-save': event.editingComment}" aria-hidden="true"></i>
+                                </button>
+                                <button ng-click="events.deleteEvent(event)" type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
