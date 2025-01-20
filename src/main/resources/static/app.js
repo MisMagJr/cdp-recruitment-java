@@ -10,7 +10,8 @@ function EventService($http){
     return {
         deleteEvent:deleteEvent,
         getEvents:getEvents,
-        updateStars: updateStars
+        updateStars: updateStars,
+        searchEvents: searchEvents
     };
 
     function deleteEvent(id){
@@ -29,6 +30,15 @@ function EventService($http){
     function updateStars(event){
         return $http.put('/api/events/' + event.id, event);
     }
+
+    function searchEvents(query) {
+        return $http.get('/api/events/search/' + query)
+            .then(searchEventsComplete);
+
+        function searchEventsComplete(response) {
+            return response.data;
+        }
+    }
 }
 
 function EventsController(EventService){
@@ -36,6 +46,8 @@ function EventsController(EventService){
     vm.deleteEvent = deleteEvent;
     vm.updateStars = updateStars;
     vm.handleEditComment = handleEditComment;
+    vm.searchEvents = searchEvents;
+    vm.resetSearch = resetSearch;
 
     activate();
 
@@ -66,5 +78,21 @@ function EventsController(EventService){
             return;
         }
         event.editingComment = !event.editingComment;
+    }
+
+    function searchEvents() {
+        if (!vm.searchQuery) {
+            return resetSearch();
+        }
+
+        return EventService.searchEvents(vm.searchQuery)
+            .then(function(events) {
+                vm.events = events;
+            });
+    }
+
+    function resetSearch() {
+        vm.searchQuery = '';
+        activate();
     }
 }

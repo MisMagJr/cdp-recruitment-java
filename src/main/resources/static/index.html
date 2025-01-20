@@ -26,6 +26,12 @@
             </div>
 
             <div ng-controller="EventsController as events" ng-cloak class="ng-cloak">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search events" ng-model="events.searchQuery">
+                    <button class="btn btn-primary" ng-click="events.searchEvents()">Search</button>
+                    <button class="btn btn-default" ng-click="events.resetSearch()">Reset</button>
+                </div>
+
                 <div class="" ng-hide="events.events.length">Aucun Event trouvé</div>
 
                 <div class="media" ng-repeat="event in events.events track by event.id">
