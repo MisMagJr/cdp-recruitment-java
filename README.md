@@ -1,7 +1,7 @@
 # Java - Spring
 
 ## Notes:
-- See branch `extra/extra-ihm-feature` for extra IHM feature that are not asked here
+- See branch `extra/extra-ihm-feature` for extra IHM feature that are not asked here, more intuitive comment edit and ability to search in IHM, only problem is when we edit after searching, we send to the api titles and band names with [count] so we modify the original title, this was fixed in fix/remove-count-on-update but never merged because the filter wasn't meant for this purpose and the use of it in IHM (And because I added it to solve an old issue I've encountered with an old solution, you can check VCS history)
 - main branch contains only 1 extra feature that I decided to put there to make it easy to manually test filteredEvents (Click on band name shows members)
 ## My Event
 
