@@ -63,6 +63,7 @@ function EventsController(EventService){
         if (event.editingComment) {
             delete event.editingComment;
             EventService.updateStars(event);
+            return;
         }
         event.editingComment = !event.editingComment;
     }
